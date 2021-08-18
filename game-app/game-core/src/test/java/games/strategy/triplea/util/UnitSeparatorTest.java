@@ -14,6 +14,7 @@ import games.strategy.engine.data.Unit;
 import games.strategy.engine.data.UnitType;
 import games.strategy.triplea.attachments.UnitAttachment;
 import games.strategy.triplea.delegate.GameDataTestUtil;
+import games.strategy.triplea.ui.BattleDisplay;
 import games.strategy.triplea.ui.mapdata.MapData;
 import games.strategy.triplea.xml.TestMapGameData;
 import java.math.BigDecimal;
@@ -127,7 +128,7 @@ class UnitSeparatorTest {
     UnitAttachment.get(drake).setMovement(4);
     UnitAttachment.get(drake).setIsAir(true);
 
-    final List<Unit> units = new ArrayList<>();
+   final List<Unit> units = new ArrayList<>();
     units.addAll(drake.createTemp(2, player1));
 
     units.get(0).setAlreadyMoved(BigDecimal.ONE);

@@ -85,10 +85,6 @@ public class CasualtyDetails extends CasualtyList {
 
     for(final Map.Entry<UnitOwner, List<Unit>> oldTargetUnitsOfOneOwnerAndType :
         oldTargetUnitsToTakeHits.entrySet()) {
-      final UnitAttachment ua =
-          UnitAttachment.get(oldTargetUnitsOfOneOwnerAndType.getKey().getType());
-      final int hitPointsOfType = ua.getHitPoints();
-
       final List<Unit> allTargetUnitsOfOwnerAndTypeThatCanTakeHits = new ArrayList<>(
           targetsGroupedByOwnerAndType.get(oldTargetUnitsOfOneOwnerAndType.getKey()));
 
@@ -101,10 +97,9 @@ public class CasualtyDetails extends CasualtyList {
           hitsToRedistribute > 0;
           hitsToRedistribute -= hitsToRedistributeToUnit){
         final Unit unit = unitIterator.next();
-        final int hitPointsUnitCanTakeWithoutBeingKilled = hitPointsOfType - (1 + unit.getHits());
 
         hitsToRedistributeToUnit =
-            Math.min(hitPointsUnitCanTakeWithoutBeingKilled,hitsToRedistribute);
+            Math.min(unit.hitsUnitCanTakeHitWithoutBeingKilled(),hitsToRedistribute);
 
         for(int i = 0; i < hitsToRedistributeToUnit; ++i)
           damaged.add(unit);
