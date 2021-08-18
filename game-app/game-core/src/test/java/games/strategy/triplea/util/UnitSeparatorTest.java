@@ -14,7 +14,6 @@ import games.strategy.engine.data.Unit;
 import games.strategy.engine.data.UnitType;
 import games.strategy.triplea.attachments.UnitAttachment;
 import games.strategy.triplea.delegate.GameDataTestUtil;
-import games.strategy.triplea.ui.BattleDisplay;
 import games.strategy.triplea.ui.mapdata.MapData;
 import games.strategy.triplea.xml.TestMapGameData;
 import java.math.BigDecimal;
