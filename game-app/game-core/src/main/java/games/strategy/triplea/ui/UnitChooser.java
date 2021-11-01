@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +39,7 @@ import javax.swing.JTextArea;
 import lombok.experimental.UtilityClass;
 import org.triplea.java.Postconditions;
 import org.triplea.java.collections.IntegerMap;
+import org.triplea.util.Awt;
 
 /**
  * Shows units to choose including the controls to make the choice. Units are grouped by owner, type
@@ -147,6 +149,7 @@ public final class UnitChooser extends JPanel {
         units,
         UnitSeparator.SeparatorCategories.builder()
             .dependents(dependent)
+            .retreatPossibility(retreatPossibility)
             .movementForAirUnitsOnly(movementForAirUnitsOnly)
             .build(),
         combinedList);
@@ -898,4 +901,5 @@ public final class UnitChooser extends JPanel {
       return getNonWithdrawableImage().getWidth();
     }
   }
+
 }

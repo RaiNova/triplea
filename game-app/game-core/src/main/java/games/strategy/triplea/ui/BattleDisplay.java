@@ -37,10 +37,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -49,7 +47,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -519,6 +516,7 @@ public class BattleDisplay extends JPanel {
 
     SwingUtilities.invokeLater(
         () -> {
+
           final boolean isEditMode = BaseEditDelegate.getEditMode(gameData.getProperties());
           if (!isEditMode) {
             dicePanel.setDiceRoll(dice);
@@ -567,48 +565,6 @@ public class BattleDisplay extends JPanel {
     Interruptibles.await(continueLatch);
     uiContext.removeShutdownLatch(continueLatch);
     return casualtyDetails.get();
-  }
-
-  /**
-   * This method determines whether the system should let the player choose
-   * how to distribute hits between units of the same owner and type
-   * differentiating by the movement points left.
-   *
-   * This is only considered to be the case if there are
-   * - air units
-   * - that can take damage without bing killed
-   *   (i.e. that have more than one hitpoint left) and
-   * - that have different movement points left.
-   *
-   * @param units among which the hits have to distributed
-   * @return {@code true} iff the system should let the player choose
-   */
-
-  static boolean playerMayChooseToDistributeHitsToUnitsWithDifferentMovement(
-      final Collection<Unit> units) {
-    final Map<UnitOwner, List<Unit>> unitsGroupedByOwnerAndType =
-        units.stream()
-            .filter(Matches.unitIsAir())
-            .filter(Unit::canTakeHitWithoutBeingKilled)
-            .collect(Collectors.groupingBy(UnitOwner::new, Collectors.toList()));
-
-    for (final UnitOwner ownerAndType : unitsGroupedByOwnerAndType.keySet()) {
-      final Iterator<Unit> unitsOfSameOwnerAndType =
-          unitsGroupedByOwnerAndType.get(ownerAndType).iterator();
-
-      final BigDecimal movementOfFirstUnit =
-          unitsOfSameOwnerAndType.next().getMovementLeft();
-
-      while (unitsOfSameOwnerAndType.hasNext()) {
-        final Unit next = unitsOfSameOwnerAndType.next();
-
-        if (!next.getMovementLeft().equals(movementOfFirstUnit)) {
-          return true;
-        }
-      }
-    }
-
-    return false;
   }
 
   private void initLayout() {

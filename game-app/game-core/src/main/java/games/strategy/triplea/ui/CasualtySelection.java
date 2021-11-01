@@ -34,7 +34,8 @@ import javax.swing.JScrollPane;
  * casualtySelection.showModalDialog().orElse(null);}
  */
 public class CasualtySelection {
-  @VisibleForTesting public UnitChooser chooser;
+  @VisibleForTesting
+  public UnitChooser chooser;
 
   private final int hitsToTake;
   private final GamePlayer player;
@@ -106,8 +107,8 @@ public class CasualtySelection {
                 availWidth,
                 size.width
                     + (size.height > availHeight
-                        ? chooserScrollPane.getVerticalScrollBar().getPreferredSize().width
-                        : 0)),
+                    ? chooserScrollPane.getVerticalScrollBar().getPreferredSize().width
+                    : 0)),
             Math.min(availHeight, size.height)));
 
     dialog.setVisible(true);
