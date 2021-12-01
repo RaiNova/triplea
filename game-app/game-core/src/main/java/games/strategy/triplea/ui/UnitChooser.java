@@ -2,6 +2,7 @@ package games.strategy.triplea.ui;
 
 import com.google.common.annotations.VisibleForTesting;
 import games.strategy.engine.data.Unit;
+import games.strategy.triplea.EngineImageLoader;
 import games.strategy.triplea.Properties;
 import games.strategy.triplea.ResourceLoader;
 import games.strategy.triplea.delegate.data.CasualtyList;
@@ -39,7 +40,14 @@ import javax.swing.JTextArea;
 import lombok.experimental.UtilityClass;
 import org.triplea.java.Postconditions;
 import org.triplea.java.collections.IntegerMap;
-import org.triplea.util.Awt;
+
+/**
+ * This is the <code>JPanel</code> that shows the units to choose
+ * including the controls to make the choice.
+ *
+ * It's used by many different use cases like placing units or
+ * choosing which units take hits in a battle round.
+ */
 
 /**
  * Shows units to choose including the controls to make the choice. Units are grouped by owner, type
