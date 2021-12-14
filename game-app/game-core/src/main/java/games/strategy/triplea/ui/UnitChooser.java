@@ -42,14 +42,6 @@ import org.triplea.java.Postconditions;
 import org.triplea.java.collections.IntegerMap;
 
 /**
- * This is the <code>JPanel</code> that shows the units to choose
- * including the controls to make the choice.
- *
- * It's used by many different use cases like placing units or
- * choosing which units take hits in a battle round.
- */
-
-/**
  * Shows units to choose including the controls to make the choice. Units are grouped by owner, type
  * and - depending on the respective context - additional attributes like damage, movement points
  * left, or whether they can be withdrawn.
@@ -802,6 +794,9 @@ public final class UnitChooser extends JPanel {
           .orElseThrow(() -> new IllegalStateException("Missing image: " + fileName));
     }
 
+    @VisibleForTesting public final UiContext uiContext;
+    @VisibleForTesting public final UnitImageFactory unitImageFactory;
+
     @VisibleForTesting
     public @Nonnull BufferedImage getNonWithdrawableImage() {
       if (nonWithdrawableImage == null) {
@@ -909,5 +904,4 @@ public final class UnitChooser extends JPanel {
       return getNonWithdrawableImage().getWidth();
     }
   }
-
 }
