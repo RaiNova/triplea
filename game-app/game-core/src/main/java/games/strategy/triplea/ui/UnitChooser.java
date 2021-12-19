@@ -2,7 +2,6 @@ package games.strategy.triplea.ui;
 
 import com.google.common.annotations.VisibleForTesting;
 import games.strategy.engine.data.Unit;
-import games.strategy.triplea.EngineImageLoader;
 import games.strategy.triplea.Properties;
 import games.strategy.triplea.ResourceLoader;
 import games.strategy.triplea.delegate.data.CasualtyList;
@@ -24,7 +23,6 @@ import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -794,8 +792,9 @@ public final class UnitChooser extends JPanel {
           .orElseThrow(() -> new IllegalStateException("Missing image: " + fileName));
     }
 
-    @VisibleForTesting public final UiContext uiContext;
-    @VisibleForTesting public final UnitImageFactory unitImageFactory;
+    private @NonNull BufferedImage loadGenericUnitsImage(final String fileName) {
+      return resourceLoader.loadBufferedImage("units", "generic", fileName).orElseThrow();
+    }
 
     @VisibleForTesting
     public @Nonnull BufferedImage getNonWithdrawableImage() {

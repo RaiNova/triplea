@@ -483,8 +483,4 @@ public class UiContext {
       log.error("Failed to flush preferences: " + prefs.absolutePath(), ex);
     }
   }
-
-  Optional<Image> loadImage(final String imageName) {
-    return resourceLoader.loadImage(imageName);
-  }
 }
