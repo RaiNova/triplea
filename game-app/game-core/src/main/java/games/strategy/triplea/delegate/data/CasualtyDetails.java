@@ -1,7 +1,6 @@
 package games.strategy.triplea.delegate.data;
 
 import games.strategy.engine.data.Unit;
-import games.strategy.triplea.delegate.Matches;
 import games.strategy.triplea.util.UnitOwner;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -74,10 +73,13 @@ public class CasualtyDetails extends CasualtyList {
                 .filter(matcher)
                 .collect(Collectors.groupingBy(UnitOwner::new, Collectors.toList())));
 
-    final List<Unit> damaged = new ArrayList<>();
+    killed.addAll(
+        killedWithCorrectOrder.stream()
+            .filter(unit -> !killed.contains(unit))
+            .collect(Collectors.toList()));
 
-    final Map<UnitOwner, List<Unit>> oldTargetUnitsToTakeHits =
-        getDamaged().stream()
+    killed.removeAll(
+        killed.stream()
             .filter(matcher)
             .collect(Collectors.groupingBy(UnitOwner::new, Collectors.toList()))
         ;
