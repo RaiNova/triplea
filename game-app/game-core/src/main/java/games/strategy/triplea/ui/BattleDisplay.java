@@ -516,7 +516,6 @@ public class BattleDisplay extends JPanel {
 
     SwingUtilities.invokeLater(
         () -> {
-
           final boolean isEditMode = BaseEditDelegate.getEditMode(gameData.getProperties());
           if (!isEditMode) {
             dicePanel.setDiceRoll(dice);
@@ -557,7 +556,6 @@ public class BattleDisplay extends JPanel {
                     actionButton.setEnabled(true);
                   }
                 }
-
               });
         });
 
