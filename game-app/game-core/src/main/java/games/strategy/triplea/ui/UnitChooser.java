@@ -764,9 +764,9 @@ public final class UnitChooser extends JPanel {
       return Optional.of(unitImageWithNonWithdrawableImage);
     }
 
-    private @Nonnull BufferedImage loadGenericUnitsImage(final String fileName) {
+    private BufferedImage loadImage(final String fileName) {
       return resourceLoader
-          .loadBufferedImage("units", "generic", fileName)
+          .loadBufferedImage("misc", fileName)
           .orElseThrow(() -> new IllegalStateException("Missing image: " + fileName));
     }
 
@@ -818,12 +818,12 @@ public final class UnitChooser extends JPanel {
      *     getNonWithdrawableImageHeight</code>.
      */
     private BufferedImage loadNonWithdrawableImage(final int nonWithdrawableImageHeight) {
-      final BufferedImage imgSmall = loadGenericUnitsImage("non-withdrawable_small.png");
+      final BufferedImage imgSmall = loadImage("non-withdrawable_small.png");
 
       if (nonWithdrawableImageHeight <= imgSmall.getHeight(null)) {
         return imgSmall;
       } else {
-        final BufferedImage imgBig = loadGenericUnitsImage("non-withdrawable.png");
+        final BufferedImage imgBig = loadImage("non-withdrawable.png");
 
         return nonWithdrawableImageHeight < imgBig.getHeight(null) ? imgSmall : imgBig;
       }
