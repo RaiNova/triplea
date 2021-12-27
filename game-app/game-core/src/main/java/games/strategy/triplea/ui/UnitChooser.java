@@ -765,7 +765,9 @@ public final class UnitChooser extends JPanel {
     }
 
     private @Nonnull BufferedImage loadGenericUnitsImage(final String fileName) {
-      return resourceLoader.loadBufferedImage("units", "generic", fileName).orElseThrow();
+      return resourceLoader
+          .loadBufferedImage("units", "generic", fileName)
+          .orElseThrow(() -> new IllegalStateException("Missing image: " + fileName));
     }
 
     @VisibleForTesting
